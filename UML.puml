@@ -1,0 +1,41 @@
+@startuml
+
+class HotelRoom {
+    - roomType : String
+    - bedType : String
+    - floor : int
+    - hasBalcony : boolean
+    - hasSeaView : boolean
+    - breakfastIncluded : boolean
+    - price : int
+}
+
+interface HotelRoomBuilder {
+    + setRoomType(String) : HotelRoomBuilder
+    + setBedType(String) : HotelRoomBuilder
+    + setFloor(int) : HotelRoomBuilder
+    + setBalcony(boolean) : HotelRoomBuilder
+    + setSeaView(boolean) : HotelRoomBuilder
+    + setBreakfast(boolean) : HotelRoomBuilder
+    + setPrice(int) : HotelRoomBuilder
+    + build() : HotelRoom
+}
+
+class StandardRoomBuilder
+class LuxuryRoomBuilder
+class HotelDirector
+class Main
+
+HotelRoomBuilder <|.. StandardRoomBuilder
+HotelRoomBuilder <|.. LuxuryRoomBuilder
+
+StandardRoomBuilder ..> HotelRoom : creates
+LuxuryRoomBuilder ..> HotelRoom : creates
+
+HotelDirector ..> StandardRoomBuilder
+HotelDirector ..> LuxuryRoomBuilder
+
+Main ..> HotelDirector
+Main ..> HotelRoom
+
+@enduml
